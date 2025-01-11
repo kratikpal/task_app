@@ -39,7 +39,7 @@ class ButtonWidget extends StatelessWidget {
                   )
                 : Text(
                     label,
-                    style:  TextStyle(
+                    style: TextStyle(
                       color: Theme.of(context).colorScheme.onPrimary,
                       fontWeight: FontWeight.bold,
                     ),

@@ -31,7 +31,7 @@ class TaskModel {
       title: json['title'],
       description: json['description'],
       createdAt: DateTime.parse(json['createdAt'] ?? DateTime.now().toString()),
-      isComplete: json['isComplete'] ?? json['completed'] ?? false,
+      isComplete: json['isComplete'] == 1 ? true : false,
     );
   }
 }
