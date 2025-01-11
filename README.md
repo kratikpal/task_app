@@ -2,6 +2,8 @@
 
 A simple Flutter task management app that allows users to log in using their email and password via Firebase Authentication. Tasks are stored both locally on the device using SQLite (sqflite) and in the cloud using Firebase Firestore, making the tasks visible to all users.
 
+- [Download](https://drive.google.com/file/d/1NCduhuVSd144OHh9XhV7HwwCmf2buKPV/view?usp=sharing) the app.
+
 ## Features
 
 - User authentication with Firebase Email/Password login.
