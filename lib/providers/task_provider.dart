@@ -7,16 +7,28 @@ class TaskProvider extends ChangeNotifier {
   bool isLoading = false;
   final List<TaskModel> _allTasks = [];
 
-  // Load tasks from the database
+  // Load tasks from both Firestore and SQLite
   Future<void> loadTasks() async {
-    tasks = await TaskDatabase.loadTasks();
-    _allTasks.addAll(tasks);
+    // First, load tasks from SQLite
+    List<TaskModel> localTasks = await TaskDatabase.loadTasksFromSQLite();
+
+    // Then, load tasks from Firestore
+    List<TaskModel> firestoreTasks =
+        await TaskDatabase.loadTasksFromFirestore();
+
+    // Merge tasks and avoid duplicates
+    _allTasks.clear();
+    _allTasks.addAll(firestoreTasks);
+    _allTasks.addAll(localTasks);
+
+    tasks = List.from(_allTasks); // Update the task list to include both
     notifyListeners();
   }
 
-  // Save tasks to the database
+  // Save tasks to both SQLite and Firestore
   Future<void> saveTasks() async {
     await TaskDatabase.saveTasks(tasks);
+    await TaskDatabase.syncTasksWithFirestore(tasks);
   }
 
   // Add a task
