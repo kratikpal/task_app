@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tasks/constants/color_constants.dart';
 import 'package:tasks/models/task_model.dart';
+import 'package:tasks/providers/auth_provider.dart';
 import 'package:tasks/providers/task_provider.dart';
 import 'package:tasks/widgets/task_tile.dart';
 
@@ -31,6 +32,17 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         backgroundColor: ColorConstants.tdBGColor,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.logout,
+              color: ColorConstants.tdBlack,
+            ),
+            onPressed: () async {
+              await Provider.of<AuthProvider>(context, listen: false).logOut();
+            },
+          ),
+        ],
         title: const Text(
           "To Do",
           style: TextStyle(color: ColorConstants.tdBlack),
@@ -85,8 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorConstants.tdBlue,
-        child: const Icon(Icons.add),
+        backgroundColor: ColorConstants.tdRed,
+        child: const Icon(Icons.add, color: Colors.white),
         onPressed: () => _showAddTaskDialog(context, taskProvider),
       ),
     );
@@ -131,6 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, setState) {
             return AlertDialog(
+              backgroundColor: ColorConstants.tdBGColor,
               title: const Text('Add New Task'),
               content: Column(
                 mainAxisSize: MainAxisSize.min,

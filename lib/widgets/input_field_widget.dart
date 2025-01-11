@@ -5,10 +5,14 @@ class InputFieldWidget extends StatelessWidget {
   final String label;
   final bool obscureText;
   final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
   const InputFieldWidget({
     super.key,
     required this.label,
     this.obscureText = false,
+    this.validator,
+    this.keyboardType,
     this.controller,
   });
 
@@ -21,6 +25,8 @@ class InputFieldWidget extends StatelessWidget {
         child: TextFormField(
           obscureText: obscureText,
           controller: controller,
+          keyboardType: keyboardType,
+          validator: validator,
           decoration: InputDecoration(
             labelText: label,
             labelStyle: TextStyle(
